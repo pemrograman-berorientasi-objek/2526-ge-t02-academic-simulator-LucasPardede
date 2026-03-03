@@ -20,14 +20,26 @@ public class Driver3 {
                 break;
             }
 
-            String[] data = line.split("#");
-            if (data.length == 4) {
-                String courseCode = data[0];
-                String studentId = data[1];
-                String academicYear = data[2];
-                String semester = data[3];
-                enrollments.add(new Enrollment(courseCode, studentId, academicYear, semester));
+            // Perubahan: Split input untuk memisahkan command dari data
+            String[] parts = line.split("#", 2); 
+            if (parts.length < 2) {
+                // Abaikan baris input yang tidak sesuai format
+                continue;
             }
+            String command = parts[0]; // Harusnya "enrollment-add"
+            String dataString = parts[1]; // Data sesungguhnya: 12S1102#12S20050#2021/2022#odd
+            String[] data = dataString.split("#"); // Split data sesuai separator '#'
+
+            if (command.equals("enrollment-add")) { // Memastikan ini adalah command untuk enrollment
+                if (data.length == 4) {
+                    String courseCode = data[0];
+                    String studentId = data[1];
+                    String academicYear = data[2];
+                    String semester = data[3];
+                    enrollments.add(new Enrollment(courseCode, studentId, academicYear, semester));
+                }
+            }
+            // Jika ada command lain yang tidak dikenal, akan diabaikan
         }
 
         for (Enrollment enrollment : enrollments) {
@@ -37,4 +49,3 @@ public class Driver3 {
         input.close();
     }
 }
-
