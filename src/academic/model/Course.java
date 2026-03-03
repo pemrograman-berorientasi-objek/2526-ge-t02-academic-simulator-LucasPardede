@@ -38,3 +38,4 @@ public class Course {
         return code + "|" + name + "|" + credits + "|" + grade;
     }
 }
+

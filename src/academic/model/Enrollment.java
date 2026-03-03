@@ -44,3 +44,4 @@ public class Enrollment {
         return courseCode + "|" + studentId + "|" + academicYear + "|" + semester + "|" + grade;
     }
 }
+
